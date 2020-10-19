@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
 import data from "../utils/data";
+import Slider from "../UI/Slider";
 
 const Container = styled.div`
   width: 95%;
@@ -41,10 +42,12 @@ const DropdownSection = styled.div`
 function Calculator(props) {
   const [product, setProduct] = useState("");
   const [legal, setLegal] = useState("");
-  //const [isError, setError] = useState(false);
+  const [amount, setAmount] = useState("");
   const [validation, setValidation] = useState("");
+
   const productRef = useRef(null);
   const legalRef = useRef(null);
+  const amountRef = useRef(null);
 
   function handleProductChange(e) {
     setProduct(e.target.value);
@@ -65,6 +68,7 @@ function Calculator(props) {
       legalRef.current.focus();
     } else {
       setValidation("");
+      //todo: calc offer
     }
   }
 
@@ -87,6 +91,12 @@ function Calculator(props) {
             ref={legalRef}
           />
         </DropdownSection>
+
+        <Slider
+          type="loan amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
 
         {validation ? (
           <Button type="submit"> {validation} </Button>
