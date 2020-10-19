@@ -25,7 +25,7 @@ const Button = styled.button`
   min-width: 7em;
   font-size: 1rem;
   min-height: 4em;
-  border-radius: 1em;
+  border-radius: 0.8em;
   cursor: pointer;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   :hover {

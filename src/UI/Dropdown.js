@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import dropdownIcon from "./dropdown.svg";
+import dropdownIcon from "./dropdown-icon.svg";
 
 const Select = styled.select`
-  padding: 1em;
-  padding-right: 4em;
-  border-radius: 1em;
+  padding: 1.5em;
+  padding-bottom: 1em;
+  border-radius: 0.8em;
   font-size: 1rem;
   border: 1px solid var(--light-gray);
   appearance: none;
@@ -21,13 +21,19 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 49%;
+  & label {
+    position: relative;
+    top: 1.5rem;
+    left: 1.6rem;
+    font-size: 0.8em;
+  }
 `;
 
 function Dropdown(props) {
   const { type, value, onChange, options } = props;
   return (
     <SelectWrapper className="dropdown-wrapper__item">
-      <label htmlFor={type}> {type} </label>
+      <label htmlFor={type}>{type}</label>
       <Select id={type} value={value} onChange={onChange}>
         <option> Select {type}</option>
         {options.map((option, index) => {
