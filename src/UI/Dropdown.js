@@ -27,8 +27,8 @@ function Dropdown(props) {
   const { type, value, onChange, options } = props;
   return (
     <SelectWrapper className="dropdown-wrapper__item">
-      <label htmlFor="product"> {type} </label>
-      <Select type="text" id="product" value={value} onChange={onChange}>
+      <label htmlFor={type}> {type} </label>
+      <Select id={type} value={value} onChange={onChange}>
         <option> Select {type}</option>
         {options.map((option, index) => {
           return (
