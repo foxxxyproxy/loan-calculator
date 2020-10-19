@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import dropdownIcon from "./dropdown-icon.svg";
 
@@ -28,13 +28,12 @@ const SelectWrapper = styled.div`
     font-size: 0.8em;
   }
 `;
-
-function Dropdown(props) {
+const Dropdown = React.forwardRef((props, ref) => {
   const { type, value, onChange, options } = props;
   return (
     <SelectWrapper className="dropdown-wrapper__item">
       <label htmlFor={type}>{type}</label>
-      <Select id={type} value={value} onChange={onChange}>
+      <Select ref={ref} id={type} value={value} onChange={onChange}>
         <option> Select {type}</option>
         {options.map((option, index) => {
           return (
@@ -46,6 +45,6 @@ function Dropdown(props) {
       </Select>
     </SelectWrapper>
   );
-}
+});
 
 export default Dropdown;

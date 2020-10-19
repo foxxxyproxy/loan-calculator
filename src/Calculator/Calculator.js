@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
 import data from "../utils/data";
@@ -41,7 +41,10 @@ const DropdownSection = styled.div`
 function Calculator(props) {
   const [product, setProduct] = useState("");
   const [legal, setLegal] = useState("");
-  const [error, setError] = useState("");
+  //const [isError, setError] = useState(false);
+  const [validation, setValidation] = useState("");
+  const productRef = useRef(null);
+  const legalRef = useRef(null);
 
   function handleProductChange(e) {
     setProduct(e.target.value);
@@ -53,6 +56,16 @@ function Calculator(props) {
 
   function handleFormSubmit(e) {
     e.preventDefault();
+    if (!product) {
+      setValidation("Please select the Product");
+      productRef.current.focus();
+    }
+    if (!legal) {
+      setValidation("Please select the Legal");
+      legalRef.current.focus();
+    } else {
+      setValidation("");
+    }
   }
 
   return (
@@ -64,17 +77,19 @@ function Calculator(props) {
             value={product}
             onChange={handleProductChange}
             options={data.product}
+            ref={productRef}
           />
           <Dropdown
             type="legal"
             value={legal}
             onChange={handleLegalChange}
             options={data.legal}
+            ref={legalRef}
           />
         </DropdownSection>
 
-        {error ? (
-          <Button type="submit"> Error </Button>
+        {validation ? (
+          <Button type="submit"> {validation} </Button>
         ) : (
           <Button error type="submit">
             Submit
