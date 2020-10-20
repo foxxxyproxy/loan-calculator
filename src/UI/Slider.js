@@ -23,14 +23,20 @@ const Input = styled.input`
   //appearance: none;
 `;
 
-function Slider(props) {
+const Slider = React.forwardRef((props, ref) => {
   const { type, value, onChange } = props;
   return (
     <SliderWrapper>
       <label htmlFor="amount"> {type} </label>
-      <Input id="amount" type="range" value={value} onChange={onChange} />
+      <Input
+        ref={ref}
+        id="amount"
+        type="range"
+        value={value}
+        onChange={onChange}
+      />
     </SliderWrapper>
   );
-}
+});
 
 export default Slider;

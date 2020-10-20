@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
 import data from "../utils/data";
 import Slider from "../UI/Slider";
+import { getValidationMessage } from "../utils/helpers";
 
 const Container = styled.div`
   width: 95%;
@@ -49,25 +50,28 @@ function Calculator(props) {
   const legalRef = useRef(null);
   const amountRef = useRef(null);
 
-  function handleProductChange(e) {
-    setProduct(e.target.value);
-  }
-
-  function handleLegalChange(e) {
-    setLegal(e.target.value);
-  }
+  useEffect(() => {
+    setValidation("");
+  }, [product, legal, amount]);
 
   function handleFormSubmit(e) {
     e.preventDefault();
+
     if (!product) {
-      setValidation("Please select the Product");
+      setValidation(getValidationMessage("product"));
       productRef.current.focus();
+      return;
     }
     if (!legal) {
-      setValidation("Please select the Legal");
+      setValidation(getValidationMessage("legal"));
       legalRef.current.focus();
+      return;
+    }
+    if (!amount) {
+      setValidation(getValidationMessage("amount"));
+      amountRef.current.focus();
+      return;
     } else {
-      setValidation("");
       //todo: calc offer
     }
   }
@@ -79,14 +83,14 @@ function Calculator(props) {
           <Dropdown
             type="product"
             value={product}
-            onChange={handleProductChange}
+            onChange={(e) => setProduct(e.target.value)}
             options={data.product}
             ref={productRef}
           />
           <Dropdown
             type="legal"
             value={legal}
-            onChange={handleLegalChange}
+            onChange={(e) => setLegal(e.target.value)}
             options={data.legal}
             ref={legalRef}
           />
@@ -96,13 +100,14 @@ function Calculator(props) {
           type="loan amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          ref={amountRef}
         />
 
         {validation ? (
           <Button type="submit"> {validation} </Button>
         ) : (
           <Button error type="submit">
-            Submit
+            Get offer
           </Button>
         )}
       </Form>
