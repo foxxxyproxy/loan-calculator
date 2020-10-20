@@ -7,11 +7,11 @@ import { getValidationMessage } from "../utils/helpers";
 
 const Container = styled.div`
   width: 95%;
-  max-width: 992px;
+  max-width: 45em;
   margin: 0 auto;
 `;
 const Form = styled.form`
-  padding: 4em;
+  padding-top: 4em;
   display: grid;
   grid-template-rows: auto;
   grid-auto-rows: 4em;
@@ -38,6 +38,9 @@ const Button = styled.button`
 const DropdownSection = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 576px) {
+    display: block;
+  }
 `;
 
 function Calculator(props) {

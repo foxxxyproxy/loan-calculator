@@ -5,6 +5,7 @@ import dropdownIcon from "./dropdown-icon.svg";
 const Select = styled.select`
   padding: 1.5em;
   padding-bottom: 1em;
+  padding-right: 2.5em;
   border-radius: 0.8em;
   font-size: 1rem;
   border: 1px solid var(--light-gray);
@@ -21,6 +22,10 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 49%;
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+
   & label {
     position: relative;
     top: 1.5rem;

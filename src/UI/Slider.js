@@ -6,8 +6,9 @@ const SliderWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid var(--light-gray);
-  border-bottom: 0;
-  border-radius: 0.8em 0.8em 0 0;
+  //border-bottom: 0;
+  //border-radius: 0.8em 0.8em 0 0;
+  border-radius: 0.8em;
   padding: 0 1.5em;
   padding-top: 0.5em;
   overflow: hidden;
