@@ -26,6 +26,7 @@ const SelectWrapper = styled.div`
     top: 1.5rem;
     left: 1.6rem;
     font-size: 0.8em;
+    padding-bottom: 2px;
   }
 `;
 const Dropdown = React.forwardRef((props, ref) => {

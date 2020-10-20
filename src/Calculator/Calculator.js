@@ -15,7 +15,7 @@ const Form = styled.form`
   display: grid;
   grid-template-rows: auto;
   grid-auto-rows: 4em;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
 `;
 
 const Button = styled.button`
@@ -44,15 +44,22 @@ function Calculator(props) {
   const [product, setProduct] = useState("");
   const [legal, setLegal] = useState("");
   const [amount, setAmount] = useState("");
+  const [duration, setDuration] = useState("");
   const [validation, setValidation] = useState("");
+
+  const [maxAmount, setMaxAmount] = useState(250000);
+  const [maxDuration, setMaxDuration] = useState(36);
+  const minAmount = 5000;
+  const minDuration = 12;
 
   const productRef = useRef(null);
   const legalRef = useRef(null);
   const amountRef = useRef(null);
+  const durationRef = useRef(null);
 
   useEffect(() => {
     setValidation("");
-  }, [product, legal, amount]);
+  }, [product, legal, amount, duration]);
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -70,6 +77,11 @@ function Calculator(props) {
     if (!amount) {
       setValidation(getValidationMessage("amount"));
       amountRef.current.focus();
+      return;
+    }
+    if (!duration) {
+      setValidation(getValidationMessage("duration"));
+      durationRef.current.focus();
       return;
     } else {
       //todo: calc offer
@@ -97,10 +109,21 @@ function Calculator(props) {
         </DropdownSection>
 
         <Slider
-          type="loan amount"
+          type="amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           ref={amountRef}
+          min={minAmount}
+          max={maxAmount}
+        />
+
+        <Slider
+          type="duration"
+          value={duration}
+          onChange={(e) => setDuration(e.target.value)}
+          ref={durationRef}
+          min={minDuration}
+          max={maxDuration}
         />
 
         {validation ? (
