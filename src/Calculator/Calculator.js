@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import Dropdown from "../UI/Dropdown";
+import Dropdown from "./Dropdown";
 import data from "../utils/data";
-import Slider from "../UI/Slider";
+import Slider from "./Slider";
 import { getValidationMessage, calc } from "../utils/helpers";
 
 const Container = styled.div`
