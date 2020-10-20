@@ -22,21 +22,26 @@
   --light-blue: #2589be;
   --light-red: #e45c4a;
 
-  --btn-background: linear-gradient(0deg, #726dcc 0%, #2589be 100%);
+  --btn-background: linear-gradient(
+    45deg,
+    rgba(0, 212, 255, 1) 0%,
+    rgba(37, 137, 190, 1) 30%,
+    rgba(37, 137, 190, 1) 70%,
+    rgba(0, 212, 255, 1) 100%
+  );
+
+  --btn-background-error: linear-gradient(
+    45deg,
+    rgba(237, 155, 183, 1) 0%,
+    rgb(179, 37, 54) 30%,
+    rgb(179, 37, 54) 70%,
+    rgba(237, 155, 183, 1) 100%
+  );
 }
 
 body {
   height: 100vh;
-  /* background: #726dcc;
-  background: linear-gradient(135deg, #726dcc 0%, #2589be 50%, #00d4ff 100%); */
-
-  background: rgb(114, 109, 204);
-  background: linear-gradient(
-    135deg,
-    rgba(114, 109, 204, 0.8) 0%,
-    rgba(37, 137, 190, 0.8) 50%,
-    rgba(0, 212, 255, 0.8) 100%
-  );
+  background: #f0f0f0;
 }
 
 ::before,

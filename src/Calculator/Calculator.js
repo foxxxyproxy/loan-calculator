@@ -22,7 +22,7 @@ const Form = styled.form`
 
 const Button = styled.button`
   background: ${(props) =>
-    props.error ? "var(--light-blue)" : "var(--light-red)"};
+    props.error ? "var(--btn-background)" : "var(--btn-background-error)"};
   color: white;
   border: 0;
   padding: 1em 2em;
@@ -31,7 +31,7 @@ const Button = styled.button`
   min-height: 4em;
   border-radius: 0.8em;
   cursor: pointer;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2);
   :hover {
     opacity: 0.8;
   }
