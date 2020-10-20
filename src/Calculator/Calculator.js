@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
 import data from "../utils/data";
 import Slider from "../UI/Slider";
-import { getValidationMessage } from "../utils/helpers";
+import { getValidationMessage, calc } from "../utils/helpers";
 
 const Container = styled.div`
   width: 95%;
@@ -66,6 +66,17 @@ function Calculator(props) {
     setValidation("");
   }, [product, legal, amount, duration]);
 
+  useEffect(() => {
+    setMaxAmount((prev) => 250000);
+    setMaxDuration((prev) => 36);
+    if (product === "Equipment") {
+      setMaxDuration((prev) => 60);
+    }
+    if (product === "Equipment" && legal === "BV") {
+      setMaxAmount((prev) => 500000);
+    }
+  }, [product, legal]);
+
   function handleFormSubmit(e) {
     e.preventDefault();
 
@@ -90,6 +101,17 @@ function Calculator(props) {
       return;
     } else {
       //todo: calc offer
+      const userData = {
+        product,
+        legal,
+        amount,
+        duration,
+        maxAmount,
+        maxDuration,
+      };
+      console.log(userData);
+      const offer = calc(userData);
+      console.log(offer);
     }
   }
 
@@ -116,7 +138,7 @@ function Calculator(props) {
         <Slider
           type="amount"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(parseInt(e.target.value, 10))}
           ref={amountRef}
           min={minAmount}
           max={maxAmount}
@@ -126,7 +148,7 @@ function Calculator(props) {
         <Slider
           type="duration"
           value={duration}
-          onChange={(e) => setDuration(e.target.value)}
+          onChange={(e) => setDuration(parseInt(e.target.value, 10))}
           ref={durationRef}
           min={minDuration}
           max={maxDuration}
