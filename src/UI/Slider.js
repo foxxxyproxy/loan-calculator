@@ -34,7 +34,7 @@ const Input = styled.input`
 `;
 
 const Slider = React.forwardRef((props, ref) => {
-  const { type, value, onChange, min, max } = props;
+  const { type, value, onChange, min, max, step } = props;
   return (
     <SliderWrapper>
       <label htmlFor={type}> {`loan ${type}`} </label>
@@ -50,6 +50,7 @@ const Slider = React.forwardRef((props, ref) => {
         id={type}
         type="range"
         value={value}
+        step={step}
         onChange={onChange}
         min={min}
         max={max}

@@ -8,14 +8,16 @@ import { getValidationMessage } from "../utils/helpers";
 const Container = styled.div`
   width: 95%;
   max-width: 45em;
-  margin: 0 auto;
+  margin: 5% auto;
+  background: #fff;
 `;
 const Form = styled.form`
-  padding-top: 4em;
+  padding: 4em;
   display: grid;
   grid-template-rows: auto;
   grid-auto-rows: 4em;
-  grid-gap: 0.5em;
+  grid-gap: 1em;
+  box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2);
 `;
 
 const Button = styled.button`
@@ -118,6 +120,7 @@ function Calculator(props) {
           ref={amountRef}
           min={minAmount}
           max={maxAmount}
+          step={1000}
         />
 
         <Slider
@@ -127,6 +130,7 @@ function Calculator(props) {
           ref={durationRef}
           min={minDuration}
           max={maxDuration}
+          step={1}
         />
 
         {validation ? (
