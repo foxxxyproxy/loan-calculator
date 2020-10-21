@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 const FormWrapper = styled.form`
   padding: 4em;
-  display: grid;
-  grid-template-rows: auto;
-  grid-auto-rows: 4em;
-  grid-gap: 2em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
   box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2);
   background: var(--main-background-color);
   margin-bottom: 2em;

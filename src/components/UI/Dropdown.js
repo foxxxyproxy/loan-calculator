@@ -16,6 +16,7 @@ const Select = styled.select`
   background-size: 0.8em 0.4em;
   background-position-x: calc(100% - 1em);
   background-position-y: 50%;
+  margin-bottom: 1em;
 `;
 
 const InnerLabel = styled(Label)`
@@ -33,9 +34,9 @@ const SelectWrapper = styled.div`
   }
 `;
 const Dropdown = React.forwardRef((props, ref) => {
-  const { type, value, onChange, options } = props;
+  const { type, value, onChange, options, className } = props;
   return (
-    <SelectWrapper className="dropdown-wrapper__item">
+    <SelectWrapper className={className}>
       <InnerLabel htmlFor={type}>{type}</InnerLabel>
       <Select ref={ref} id={type} value={value} onChange={onChange}>
         <option value="" disabled>

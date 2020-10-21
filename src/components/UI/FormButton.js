@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Button = styled.button`
   background: ${(props) =>
-    props.error ? "var(--btn-background)" : "var(--btn-background-error)"};
+    props.error ? "var(--btn-background-error)" : "var(--btn-background)"};
   color: white;
   border: 0;
   padding: 1em 2em;

@@ -8,9 +8,10 @@ const SliderWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid var(--light-gray);
-
+  height: 3.4em;
   border-radius: 0.8em;
   padding-top: 0.5em;
+  margin-bottom: 2em;
 `;
 
 const Input = styled.input`
@@ -49,37 +50,35 @@ const InputRange = styled(Input)`
   }
 
   ::-webkit-slider-thumb {
-    width: 1em;
-    height: 1em;
+    width: 1.2em;
+    height: 1.2em;
     background: #fff;
     border:3px solid var(--light-blue);
     border-radius: 50%;
     cursor: pointer;
     appearance: none;
     position:relative;
-    top:-50%;
+    top:-60%;
   }
 
   ::-moz-range-thumb{
-    width: 1em;
-    height: 1em;
+    width: 1.2em;
+    height: 1.2em;
     background: #fff;
     border:3px solid var(--light-blue);
     border-radius: 50%;
     cursor: pointer;
     appearance: none;
     position:relative;
-    top:-50%;
+    top:-60%;
   }
-
-
 `;
 
 const HintPanel = styled.div`
   display: flex;
   justify-content: flex-end;
   position: absolute;
-  bottom: -1em;
+  bottom: -1.2em;
   right: 0em;
   span {
     font-size: 0.8rem;
@@ -87,9 +86,9 @@ const HintPanel = styled.div`
 `;
 
 const Slider = React.forwardRef((props, ref) => {
-  const { type, value, onChange, min, max, step } = props;
+  const { type, value, onChange, min, max, step, className } = props;
   return (
-    <SliderWrapper>
+    <SliderWrapper className={className}>
       <Label htmlFor={type}> {`loan ${type}`} </Label>
       <Input
         output
