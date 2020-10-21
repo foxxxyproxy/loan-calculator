@@ -1,42 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import Dropdown from "./Dropdown";
-import data from "../utils/data";
-import Slider from "./Slider";
-import { getValidationMessage, getOffer } from "../utils/helpers";
-
-const Container = styled.div`
-  width: 95%;
-  max-width: 45em;
-  margin: 5% auto;
-  background: #fff;
-`;
-const Form = styled.form`
-  padding: 4em;
-  display: grid;
-  grid-template-rows: auto;
-  grid-auto-rows: 4em;
-  grid-gap: 2em;
-  box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2);
-`;
-
-const Button = styled.button`
-  background: ${(props) =>
-    props.error ? "var(--btn-background)" : "var(--btn-background-error)"};
-  color: white;
-  border: 0;
-  padding: 1em 2em;
-  min-width: 7em;
-  font-size: 1rem;
-  font-style: bold;
-  min-height: 4em;
-  border-radius: 0.8em;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px -2px rgba(0, 0, 0, 0.2);
-  :hover {
-    opacity: 0.8;
-  }
-`;
+import Dropdown from "../UI/Dropdown";
+import data from "../../utils/data";
+import Slider from "../UI/Slider";
+import FormButton from "../UI/FormButton";
+import Form from "../UI/Form";
+import Container from "../UI/Container";
+import { getValidationMessage, getOffer } from "../../utils/helpers";
 
 const DropdownSection = styled.div`
   display: flex;
@@ -55,6 +25,7 @@ function Calculator(props) {
   const [amount, setAmount] = useState(minAmount);
   const [duration, setDuration] = useState(minDuration);
   const [validation, setValidation] = useState("");
+  const [interestRate, setInterestRate] = useState("");
 
   const [maxAmount, setMaxAmount] = useState(250000);
   const [maxDuration, setMaxDuration] = useState(36);
@@ -67,6 +38,7 @@ function Calculator(props) {
 
   useEffect(() => {
     setValidation("");
+    setInterestRate("");
   }, [product, legal, amount, duration]);
 
   useEffect(() => {
@@ -103,7 +75,7 @@ function Calculator(props) {
       durationRef.current.focus();
       return;
     }
-    //todo: calc offer
+
     const userData = {
       product,
       legal,
@@ -112,9 +84,9 @@ function Calculator(props) {
       maxAmount,
       maxDuration,
     };
-    console.log(userData);
+    console.log({ userData });
     const offer = getOffer(userData);
-    console.log(offer);
+    setInterestRate(offer);
   }
 
   return (
@@ -158,11 +130,13 @@ function Calculator(props) {
         />
 
         {validation ? (
-          <Button type="submit"> {validation} </Button>
+          <FormButton type="submit"> {validation} </FormButton>
         ) : (
-          <Button error type="submit">
-            Get offer
-          </Button>
+          <FormButton error type="submit">
+            {interestRate
+              ? `Your interest rate: ${interestRate}%`
+              : "Get offer"}
+          </FormButton>
         )}
       </Form>
     </Container>

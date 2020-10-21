@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import dropdownIcon from "../assets/dropdown-icon.svg";
+import dropdownIcon from "../../assets/dropdown-icon.svg";
 import { Label } from "./Label";
 
 const Select = styled.select`

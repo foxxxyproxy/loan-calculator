@@ -30,7 +30,18 @@ const InputRange = styled(Input)`
   margin:0;
   appearance: none;
 
-  ::-webkit-slider-runnable-track {
+  :focus {
+    outline: 1px solid #e4e7ec;
+  }
+
+  ::-webkit-slider-runnable-track  {
+    background: var(--light-blue);
+    border-radius: 0 0 0.8em 0.8em;
+    height: 0.5em;
+    cursor: pointer;
+  }
+
+  ::-moz-range-track{
     background: var(--light-blue);
     border-radius: 0 0 0.8em 0.8em;
     height: 0.5em;
@@ -48,6 +59,20 @@ const InputRange = styled(Input)`
     position:relative;
     top:-50%;
   }
+
+  ::-moz-range-thumb{
+    width: 1em;
+    height: 1em;
+    background: #fff;
+    border:3px solid var(--light-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+    position:relative;
+    top:-50%;
+  }
+
+
 `;
 
 const HintPanel = styled.div`
