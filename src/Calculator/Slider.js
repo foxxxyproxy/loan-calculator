@@ -6,12 +6,11 @@ const SliderWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid var(--light-gray);
-  //border-bottom: 0;
-  //border-radius: 0.8em 0.8em 0 0;
+
   border-radius: 0.8em;
   padding: 0 1.5em;
   padding-top: 0.5em;
-  overflow: hidden;
+  //overflow: hidden;
 
   & label {
     position: relative;
@@ -29,6 +28,7 @@ const Input = styled.input`
   border: 0;
   margin: 0;
   padding: 0;
+  line-height: 1.2;
   width: ${(props) => (props.output ? "100px" : "100%")};
   padding: ${(props) => (props.output ? "2px 0" : "0")};
 `;

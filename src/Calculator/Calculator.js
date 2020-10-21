@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Dropdown from "./Dropdown";
 import data from "../utils/data";
 import Slider from "./Slider";
-import { getValidationMessage, calc } from "../utils/helpers";
+import { getValidationMessage, getOffer } from "../utils/helpers";
 
 const Container = styled.div`
   width: 95%;
@@ -55,7 +55,7 @@ function Calculator(props) {
   const [maxAmount, setMaxAmount] = useState(250000);
   const [maxDuration, setMaxDuration] = useState(36);
   const minAmount = 5000;
-  const minDuration = 12;
+  const minDuration = 3;
 
   const productRef = useRef(null);
   const legalRef = useRef(null);
@@ -110,7 +110,7 @@ function Calculator(props) {
         maxDuration,
       };
       console.log(userData);
-      const offer = calc(userData);
+      const offer = getOffer(userData);
       console.log(offer);
     }
   }

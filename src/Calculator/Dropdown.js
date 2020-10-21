@@ -8,6 +8,7 @@ const Select = styled.select`
   padding-right: 2.5em;
   border-radius: 0.8em;
   font-size: 1rem;
+  line-height: 1.2;
   border: 1px solid var(--light-gray);
   appearance: none;
   cursor: pointer;
@@ -40,7 +41,9 @@ const Dropdown = React.forwardRef((props, ref) => {
     <SelectWrapper className="dropdown-wrapper__item">
       <label htmlFor={type}>{type}</label>
       <Select ref={ref} id={type} value={value} onChange={onChange}>
-        <option> Select {type}</option>
+        <option value="" disabled>
+          Select {type}
+        </option>
         {options.map((option, index) => {
           return (
             <option key={index} value={option}>
