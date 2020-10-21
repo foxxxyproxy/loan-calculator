@@ -46,17 +46,19 @@ const DropdownSection = styled.div`
 `;
 
 function Calculator(props) {
+  const minAmount = 5000;
+  const minDuration = 3;
+
   const [product, setProduct] = useState("");
   const [legal, setLegal] = useState("");
-  const [amount, setAmount] = useState("");
-  const [duration, setDuration] = useState("");
+  const [amount, setAmount] = useState(minAmount);
+  const [duration, setDuration] = useState(minDuration);
   const [validation, setValidation] = useState("");
 
   const [maxAmount, setMaxAmount] = useState(250000);
   const [maxDuration, setMaxDuration] = useState(36);
-  const minAmount = 5000;
-  const minDuration = 3;
 
+  //for managing inputs focus
   const productRef = useRef(null);
   const legalRef = useRef(null);
   const amountRef = useRef(null);
@@ -67,13 +69,13 @@ function Calculator(props) {
   }, [product, legal, amount, duration]);
 
   useEffect(() => {
-    setMaxAmount((prev) => 250000);
-    setMaxDuration((prev) => 36);
+    setMaxAmount(250000);
+    setMaxDuration(36);
     if (product === "Equipment") {
-      setMaxDuration((prev) => 60);
+      setMaxDuration(60);
     }
     if (product === "Equipment" && legal === "BV") {
-      setMaxAmount((prev) => 500000);
+      setMaxAmount(500000);
     }
   }, [product, legal]);
 
@@ -99,20 +101,19 @@ function Calculator(props) {
       setValidation(getValidationMessage("duration"));
       durationRef.current.focus();
       return;
-    } else {
-      //todo: calc offer
-      const userData = {
-        product,
-        legal,
-        amount,
-        duration,
-        maxAmount,
-        maxDuration,
-      };
-      console.log(userData);
-      const offer = getOffer(userData);
-      console.log(offer);
     }
+    //todo: calc offer
+    const userData = {
+      product,
+      legal,
+      amount,
+      duration,
+      maxAmount,
+      maxDuration,
+    };
+    console.log(userData);
+    const offer = getOffer(userData);
+    console.log(offer);
   }
 
   return (

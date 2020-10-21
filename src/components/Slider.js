@@ -44,6 +44,8 @@ const Slider = React.forwardRef((props, ref) => {
         name="result"
         value={value}
         onChange={onChange}
+        min={min}
+        max={max}
       />
       <Input
         ref={ref}

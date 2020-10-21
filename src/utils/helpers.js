@@ -10,7 +10,7 @@ export function getValidationMessage(field) {
 }
 
 export function getOffer({ amount, duration, maxDuration }) {
-  return new Calc(amount, duration, maxDuration).calcInterestRate();
+  return new Calc({ amount, duration, maxDuration }).calcInterestRate();
 }
 
 export class Calc {
