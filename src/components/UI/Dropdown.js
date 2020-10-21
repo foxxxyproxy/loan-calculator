@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import dropdownIcon from "../../assets/dropdown-icon.svg";
 import { Label } from "./Label";
+import PropTypes from "prop-types";
 
 const Select = styled.select`
   padding: 1.7em 2.5em 0.5em 1.5em;
@@ -55,3 +56,11 @@ const Dropdown = React.forwardRef((props, ref) => {
 });
 
 export default Dropdown;
+
+Dropdown.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  options: PropTypes.array,
+  className: PropTypes.string,
+};

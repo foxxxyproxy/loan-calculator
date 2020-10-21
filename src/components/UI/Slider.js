@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Label } from "./Label";
+import PropTypes from "prop-types";
 
 const SliderWrapper = styled.div`
   position: relative;
@@ -126,3 +127,13 @@ const Slider = React.forwardRef((props, ref) => {
 });
 
 export default Slider;
+
+Slider.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  step: PropTypes.number,
+  className: PropTypes.string,
+};
