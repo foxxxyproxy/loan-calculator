@@ -2,35 +2,68 @@ import React from "react";
 import styled from "styled-components";
 
 const SliderWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid var(--light-gray);
 
   border-radius: 0.8em;
-  padding: 0 1.5em;
   padding-top: 0.5em;
-  //overflow: hidden;
 
   & label {
     position: relative;
-    font-size: 0.8em;
+    font-size: 0.8rem;
     z-index: 10;
+    padding: 0 1.5rem;
     padding-bottom: 2px;
   }
 `;
 
 const Input = styled.input`
   position: relative;
-  bottom: 0px;
   z-index: 10;
-  //appearance: none;
   border: 0;
   margin: 0;
-  padding: 0;
+  margin: 0 1.5em;
   line-height: 1.2;
-  width: ${(props) => (props.output ? "100px" : "100%")};
-  padding: ${(props) => (props.output ? "2px 0" : "0")};
+  width: 5em;
+`;
+
+const InputRange = styled(Input)`
+  width 100%;
+  padding:0;
+  margin:0;
+  appearance: none;
+
+  ::-webkit-slider-runnable-track {
+    background: var(--light-blue);
+    border-radius: 0 0 0.8em 0.8em;
+    height: 0.5em;
+    cursor: pointer;
+  }
+
+  ::-webkit-slider-thumb {
+    width: 1em;
+    height: 1em;
+    background: var(--light-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+    position:relative;
+    top:-50%;
+  }
+`;
+
+const HintPanel = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: -1em;
+  right: 0em;
+  span {
+    font-size: 0.8rem;
+  }
 `;
 
 const Slider = React.forwardRef((props, ref) => {
@@ -47,7 +80,7 @@ const Slider = React.forwardRef((props, ref) => {
         min={min}
         max={max}
       />
-      <Input
+      <InputRange
         ref={ref}
         id={type}
         type="range"
@@ -57,6 +90,18 @@ const Slider = React.forwardRef((props, ref) => {
         min={min}
         max={max}
       />
+      <HintPanel>
+        <span>
+          {"max: "}
+          {type === "amount"
+            ? new Intl.NumberFormat("nl-NL", {
+                style: "currency",
+                currency: "EUR",
+                maximumSignificantDigits: 2,
+              }).format(max)
+            : `${max} months`}
+        </span>
+      </HintPanel>
     </SliderWrapper>
   );
 });

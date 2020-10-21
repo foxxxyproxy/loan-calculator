@@ -23,6 +23,7 @@ const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 49%;
+  padding-top: 0.5em;
   @media (max-width: 576px) {
     width: 100%;
   }
@@ -30,7 +31,7 @@ const SelectWrapper = styled.div`
   & label {
     position: relative;
     top: 1.5rem;
-    left: 1.6rem;
+    left: 1.5rem;
     font-size: 0.8em;
     padding-bottom: 2px;
   }
