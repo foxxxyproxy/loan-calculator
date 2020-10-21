@@ -86,22 +86,12 @@ function Calculator(props) {
       durationRef.current.focus();
       return;
     }
-
-    const userData = {
-      product,
-      legal,
-      amount,
-      duration,
-      maxAmount,
-      maxDuration,
-    };
-    console.log({ userData });
-    const offer = getOffer(userData);
+    const offer = getOffer({ amount, duration, maxDuration });
     setInterestRate(offer);
   }
 
   return (
-    <Container className="calculator_container">
+    <Container className="calculator-container">
       <Form onSubmit={handleFormSubmit}>
         <DropdownSection className="dropdown-wrapper">
           <Dropdown

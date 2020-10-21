@@ -13,16 +13,21 @@ export function getOffer({ amount, duration, maxDuration }) {
   return new Calc({ amount, duration, maxDuration }).calcInterestRate();
 }
 
+/**
+ * @param {number} amount - loan amount
+ * @param {number} duration - loan duration
+ * @param {number} maxDuration - max loan duration
+ */
 export class Calc {
   constructor({ amount, duration, maxDuration }) {
-    this.amount = amount; //loan amount
-    this.duration = duration; //loan duration
-    this.maxDuration = maxDuration; //max loan duration
+    this.amount = amount;
+    this.duration = duration;
+    this.maxDuration = maxDuration;
 
-    if (amount <= 50000) {
+    if (amount < 50000) {
       this.minRate = 6; //min interest rate(%)
       this.maxRate = 8; //max interest rate(%)
-    } else if (amount <= 150000) {
+    } else if (amount < 150000) {
       this.minRate = 5;
       this.maxRate = 7;
     } else if (amount <= 500000) {
@@ -46,6 +51,7 @@ export class Calc {
    *
    * b = minRate
    * k = (maxRate - minRate)/maxDuration
+   * @return {number} interestRate
    */
   calcInterestRate() {
     const interestRate =
