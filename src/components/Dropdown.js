@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import dropdownIcon from "../assets/dropdown-icon.svg";
+import { Label } from "./Label";
 
 const Select = styled.select`
-  padding: 1.5em;
-  padding-bottom: 1em;
-  padding-right: 2.5em;
+  padding: 1.7em 2.5em 0.5em 1.5em;
   border-radius: 0.8em;
   font-size: 1rem;
   line-height: 1.2;
@@ -19,28 +18,25 @@ const Select = styled.select`
   background-position-y: 50%;
 `;
 
+const InnerLabel = styled(Label)`
+  top: 1.5rem;
+`;
+
 const SelectWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 49%;
-  padding-top: 0.5em;
   @media (max-width: 576px) {
     width: 100%;
-  }
-
-  & label {
-    position: relative;
-    top: 1.5rem;
-    left: 1.5rem;
-    font-size: 0.8em;
-    padding-bottom: 2px;
   }
 `;
 const Dropdown = React.forwardRef((props, ref) => {
   const { type, value, onChange, options } = props;
   return (
     <SelectWrapper className="dropdown-wrapper__item">
-      <label htmlFor={type}>{type}</label>
+      <InnerLabel htmlFor={type}>{type}</InnerLabel>
       <Select ref={ref} id={type} value={value} onChange={onChange}>
         <option value="" disabled>
           Select {type}

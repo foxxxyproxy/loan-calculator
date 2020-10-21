@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Label } from "./Label";
 
 const SliderWrapper = styled.div`
   position: relative;
@@ -10,14 +11,6 @@ const SliderWrapper = styled.div`
 
   border-radius: 0.8em;
   padding-top: 0.5em;
-
-  & label {
-    position: relative;
-    font-size: 0.8rem;
-    z-index: 10;
-    padding: 0 1.5rem;
-    padding-bottom: 2px;
-  }
 `;
 
 const Input = styled.input`
@@ -25,7 +18,8 @@ const Input = styled.input`
   z-index: 10;
   border: 0;
   margin: 0;
-  margin: 0 1.5em;
+  margin: 0 1.5rem;
+  padding: 0;
   line-height: 1.2;
   width: 5em;
 `;
@@ -46,7 +40,8 @@ const InputRange = styled(Input)`
   ::-webkit-slider-thumb {
     width: 1em;
     height: 1em;
-    background: var(--light-blue);
+    background: #fff;
+    border:3px solid var(--light-blue);
     border-radius: 50%;
     cursor: pointer;
     appearance: none;
@@ -70,7 +65,7 @@ const Slider = React.forwardRef((props, ref) => {
   const { type, value, onChange, min, max, step } = props;
   return (
     <SliderWrapper>
-      <label htmlFor={type}> {`loan ${type}`} </label>
+      <Label htmlFor={type}> {`loan ${type}`} </Label>
       <Input
         output
         type="number"

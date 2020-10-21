@@ -28,6 +28,7 @@ const Button = styled.button`
   padding: 1em 2em;
   min-width: 7em;
   font-size: 1rem;
+  font-style: bold;
   min-height: 4em;
   border-radius: 0.8em;
   cursor: pointer;
