@@ -99,6 +99,7 @@ const Slider = React.forwardRef((props, ref) => {
         onChange={onChange}
         min={min}
         max={max}
+        step="1"
       />
       <InputRange
         ref={ref}
@@ -130,10 +131,10 @@ export default Slider;
 
 Slider.propTypes = {
   type: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
-  min: PropTypes.number,
-  max: PropTypes.number,
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   step: PropTypes.number,
   className: PropTypes.string,
 };

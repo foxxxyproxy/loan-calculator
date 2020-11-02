@@ -19,6 +19,42 @@ describe("Calculation", () => {
     expect(offer.getMaxRate()).toEqual(6);
   });
 
+  it("when the user asks 55000 loan to buy new equipment for 30 months, the interest rate = 5,26%", () => {
+    const userData = {
+      product: "Equipment",
+      legal: "BV",
+      amount: 55000,
+      duration: 8,
+      maxAmount: 500,
+      maxDuration: 60,
+    };
+
+    console.log({ userData });
+    const offer = new Calc(userData);
+
+    expect(offer.calcInterestRate()).toEqual(5.26);
+    expect(offer.getMinRate()).toEqual(5);
+    expect(offer.getMaxRate()).toEqual(7);
+  });
+
+  it("when the user asks 185000 loan to buy new equipment for 28 months, the interest rate = 4,93%", () => {
+    const userData = {
+      product: "Equipment",
+      legal: "Eenmanszak",
+      amount: 185000,
+      duration: 28,
+      maxAmount: 250,
+      maxDuration: 60,
+    };
+
+    console.log({ userData });
+    const offer = new Calc(userData);
+
+    expect(offer.calcInterestRate()).toEqual(4.93);
+    expect(offer.getMinRate()).toEqual(4);
+    expect(offer.getMaxRate()).toEqual(6);
+  });
+
   it("minRate and MaxRate calculate correctly", () => {
     const userData1 = {
       product: "Marketing",

@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Dropdown from "../UI/Dropdown";
-import data from "../../utils/data";
+import { options, MIN_AMOUNT, MIN_DURATION } from "../../utils/data";
 import Slider from "../UI/Slider";
 import FormButton from "../UI/FormButton";
 import Form from "../UI/Form";
 import Container from "../UI/Container";
-import { getValidationMessage, getOffer } from "../../utils/helpers";
+import {
+  getValidationMessage,
+  getOffer,
+  getMaxValues,
+} from "../../utils/helpers";
 
 const DropdownSection = styled.div`
   display: flex;
@@ -28,18 +32,15 @@ const SliderSection = styled.div`
 `;
 
 function Calculator(props) {
-  const minAmount = 5000;
-  const minDuration = 3;
-
   const [product, setProduct] = useState("");
   const [legal, setLegal] = useState("");
-  const [amount, setAmount] = useState(minAmount);
-  const [duration, setDuration] = useState(minDuration);
+  const [amount, setAmount] = useState(MIN_AMOUNT);
+  const [duration, setDuration] = useState(MIN_DURATION);
   const [validation, setValidation] = useState("");
   const [interestRate, setInterestRate] = useState("");
 
-  const [maxAmount, setMaxAmount] = useState(250000);
-  const [maxDuration, setMaxDuration] = useState(36);
+  const [maxAmount, setMaxAmount] = useState("");
+  const [maxDuration, setMaxDuration] = useState("");
 
   //for managing inputs focus
   const productRef = useRef(null);
@@ -53,14 +54,12 @@ function Calculator(props) {
   }, [product, legal, amount, duration]);
 
   useEffect(() => {
-    setMaxAmount(250000);
-    setMaxDuration(36);
-    if (product === "Equipment") {
-      setMaxDuration(60);
-    }
-    if (product === "Equipment" && legal === "BV") {
-      setMaxAmount(500000);
-    }
+    const { maxAmount, maxDuration } = getMaxValues({
+      product,
+      legal,
+    });
+    setMaxAmount(maxAmount);
+    setMaxDuration(maxDuration);
   }, [product, legal]);
 
   function handleFormSubmit(e) {
@@ -90,6 +89,33 @@ function Calculator(props) {
     setInterestRate(offer);
   }
 
+  function handleAmountChange(e) {
+    const value = e.target.value;
+    if (value === "") {
+      setAmount(value);
+      return;
+    }
+    const num = parseInt(value, 10);
+
+    if (isNaN(num)) {
+      return;
+    }
+    setAmount(num);
+  }
+
+  function handleDurationChange(e) {
+    const value = e.target.value;
+    if (value === "") {
+      setDuration(value);
+      return;
+    }
+    const num = parseInt(value, 10);
+    if (isNaN(num)) {
+      return;
+    }
+    setDuration(num);
+  }
+
   return (
     <Container className="calculator-container">
       <Form onSubmit={handleFormSubmit}>
@@ -99,7 +125,7 @@ function Calculator(props) {
             type="product"
             value={product}
             onChange={(e) => setProduct(e.target.value)}
-            options={data.product}
+            options={options.product}
             ref={productRef}
           />
           <Dropdown
@@ -107,7 +133,7 @@ function Calculator(props) {
             type="legal"
             value={legal}
             onChange={(e) => setLegal(e.target.value)}
-            options={data.legal}
+            options={options.legal}
             ref={legalRef}
           />
         </DropdownSection>
@@ -117,9 +143,9 @@ function Calculator(props) {
             className="slider-wrapper__item"
             type="amount"
             value={amount}
-            onChange={(e) => setAmount(parseInt(e.target.value, 10))}
+            onChange={handleAmountChange}
             ref={amountRef}
-            min={minAmount}
+            min={MIN_AMOUNT}
             max={maxAmount}
             step={1000}
           />
@@ -128,9 +154,9 @@ function Calculator(props) {
             className="slider-wrapper__item"
             type="duration"
             value={duration}
-            onChange={(e) => setDuration(parseInt(e.target.value, 10))}
+            onChange={handleDurationChange}
             ref={durationRef}
-            min={minDuration}
+            min={MIN_DURATION}
             max={maxDuration}
             step={1}
           />

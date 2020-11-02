@@ -1,3 +1,5 @@
+import { P_MARKETING, P_EQUIPMENT, L_BV, L_EENMANSZAK } from "./data";
+
 const validationMessages = {
   product: "Please select the Product",
   legal: "Please select the Legal",
@@ -7,6 +9,46 @@ const validationMessages = {
 
 export function getValidationMessage(field) {
   return validationMessages[field];
+}
+
+const MaxValuesConfig = [
+  {
+    product: P_MARKETING,
+    legal: L_BV,
+    maxAmount: 250000,
+    maxDuration: 36,
+  },
+  {
+    product: P_MARKETING,
+    legal: L_EENMANSZAK,
+    maxAmount: 250000,
+    maxDuration: 36,
+  },
+  {
+    product: P_EQUIPMENT,
+    legal: L_BV,
+    maxAmount: 500000,
+    maxDuration: 60,
+  },
+  {
+    product: P_EQUIPMENT,
+    legal: L_EENMANSZAK,
+    maxAmount: 250000,
+    maxDuration: 60,
+  },
+];
+
+export function getMaxValues({ product, legal }) {
+  let newMaxValues = MaxValuesConfig.find(
+    (row) => row.product === product && row.legal === legal
+  );
+  if (!newMaxValues) {
+    let defaultMaxValues = MaxValuesConfig[0];
+    newMaxValues = defaultMaxValues;
+  }
+  const maxAmount = newMaxValues.maxAmount;
+  const maxDuration = newMaxValues.maxDuration;
+  return { maxAmount, maxDuration };
 }
 
 export function getOffer({ amount, duration, maxDuration }) {

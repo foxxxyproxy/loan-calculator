@@ -5,11 +5,23 @@ import { fireEvent } from "@testing-library/dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-it("on Submit without selected data - Error", () => {
-  let { container, unmount } = render(<Calculator />);
-  const button = container.querySelector("[data-testid='button-submit']");
+let container, unmount;
 
-  expect(button.innerHTML).toBe("Get offer");
+beforeEach(() => {
+  const utils = render(<Calculator />);
+  container = utils.container;
+  unmount = utils.unmount;
+});
+
+afterEach(() => {
+  unmount();
+});
+
+it("on Submit without selected data - Error", () => {
+  const button = screen.getByTestId("button-submit");
+
+  expect(button).toHaveTextContent("Get offer");
+
   expect(container.querySelector("[data-testid='button-error']")).toBe(null);
 
   fireEvent(
@@ -20,29 +32,23 @@ it("on Submit without selected data - Error", () => {
     })
   );
 
-  const buttonError = container.querySelector("[data-testid='button-error']");
-  expect(buttonError).not.toBe(null);
-  unmount();
+  const buttonError = screen.getByTestId("button-error");
+  expect(buttonError).toBeInTheDocument();
 });
 
 it("Dropdowns are rendering", () => {
-  let { container, unmount } = render(<Calculator />);
   const dropdowns = container.querySelectorAll(".dropdown-wrapper__item");
   expect(dropdowns).not.toBe(null);
   expect(dropdowns.length).toBe(2);
-  unmount();
 });
 
 it("Sliders are rendering", () => {
-  let { container, unmount } = render(<Calculator />);
   const sliders = container.querySelectorAll(".slider-wrapper__item");
   expect(sliders).not.toBe(null);
   expect(sliders.length).toBe(2);
-  unmount();
 });
 
 it("Product dropdown is working", () => {
-  let { container, unmount } = render(<Calculator />);
   const productSelect = container.querySelectorAll("select")[0];
   expect(productSelect).not.toBe(null);
   expect(productSelect).toHaveValue("");
@@ -54,12 +60,9 @@ it("Product dropdown is working", () => {
   userEvent.selectOptions(productSelect, ["Marketing"]);
   expect(productSelect).toHaveValue("Marketing");
   expect(screen.getByText("Marketing").selected).toBe(true);
-
-  unmount();
 });
 
 it("Legal dropdown is working", () => {
-  let { container, unmount } = render(<Calculator />);
   const legalSelect = container.querySelectorAll("select")[1];
   expect(legalSelect).not.toBe(null);
   expect(legalSelect).toHaveValue("");
@@ -71,12 +74,9 @@ it("Legal dropdown is working", () => {
   userEvent.selectOptions(legalSelect, ["Eenmanszak"]);
   expect(legalSelect).toHaveValue("Eenmanszak");
   expect(screen.getByText("Eenmanszak").selected).toBe(true);
-
-  unmount();
 });
 
 it("on Submit all selected data - no Error", () => {
-  let { container, unmount } = render(<Calculator />);
   const button = container.querySelector("[data-testid='button-submit']");
   const productSelect = container.querySelectorAll("select")[0];
   const legalSelect = container.querySelectorAll("select")[1];
@@ -96,5 +96,4 @@ it("on Submit all selected data - no Error", () => {
 
   expect(container.querySelector("[data-testid='button-error']")).toBe(null);
   expect(button.innerHTML).toBe("Your interest rate: 6.1%");
-  unmount();
 });
