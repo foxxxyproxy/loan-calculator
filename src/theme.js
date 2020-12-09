@@ -1,3 +1,7 @@
+/**
+ * Global constants: Colors, Themes
+ */
+
 const colors = {};
 
 export const defaultTheme = {
